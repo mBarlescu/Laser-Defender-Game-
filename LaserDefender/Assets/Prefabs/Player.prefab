@@ -94,4 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   padding: 1
-  laser: {fileID: 0}
+  laserObject: {fileID: 5162454575230795222, guid: acbfdaa72e75e1b458545bcc5cc93ea7,
+    type: 3}
+  laserSpeed: 10
+  fireRate: 0.1

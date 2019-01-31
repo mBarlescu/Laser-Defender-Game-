@@ -9,15 +9,29 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
     [SerializeField] GameObject laserObject;
-    [SerializeField] float laserSpeed = 10f;
+    [SerializeField] float laserSpeed = 15f;
+    [SerializeField] float fireRate = 0.1f;
     float xMax;
     float xMin;
     float yMax;
     float yMin;
+
+    Coroutine fireCoroutine;
     // Start is called before the first frame update
+    /*
+     IEnumerator sayHello()
+    {
+        Debug.Log("hello");
+        yield return new WaitForSeconds(3);
+        Debug.Log("world");
+    }
+    */
+
     void Start()
     {
         moveBoundaries();
+       // StartCoroutine(sayHello());
+       
     }
 
    
@@ -30,10 +44,24 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
-            GameObject laser = Instantiate(laserObject, transform.position, Quaternion.identity);
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            fireCoroutine = StartCoroutine(FireContinuously());
+
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            StopCoroutine(fireCoroutine);
+        }
+    }
+
+    IEnumerator FireContinuously()
+    {
+        while(true)
+        { 
+        GameObject laser = Instantiate(laserObject, transform.position, Quaternion.identity);
+        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+        yield return new WaitForSeconds(fireRate);
         }
     }
 

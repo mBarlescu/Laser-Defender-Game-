@@ -6,6 +6,7 @@ public class EnemyPathing : MonoBehaviour
 {
     WaveConfig waveConfig;
     List<Transform> waypoints;
+    
    
     int waypointIndex = 0;
     

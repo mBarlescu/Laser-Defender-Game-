@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [Header("Player")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
+    [SerializeField] float health = 200f;
+
+    [Header("Projectile")]
     [SerializeField] GameObject laserObject;
     [SerializeField] float laserSpeed = 15f;
     [SerializeField] float fireRate = 0.1f;
@@ -26,6 +29,23 @@ public class Player : MonoBehaviour
         Debug.Log("world");
     }
     */
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
+        if (!damageDealer) { return; }
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.getDamage();
+        damageDealer.hit();
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

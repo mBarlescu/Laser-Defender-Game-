@@ -1,6 +1,6 @@
 # Laser-Defender-Game-
 
-top down 'space invaders' shooter made with unity
+Top down 'space invaders' style shooter made with unity.
 
 
 ## ScreenShots
